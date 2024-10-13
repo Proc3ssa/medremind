@@ -1,0 +1,69 @@
+.login{
+    width:600px;
+    box-shadow: 0px 4px 6px rgb(17, 17, 17);
+    border-radius: 5px;
+    height: 300px;
+    margin: auto;
+    display: flex;
+    background-color: rgb(229, 230, 228);
+}
+
+.login div{
+    width: 99%;
+    height: 100%;
+
+}
+.data{
+    background: -webkit-linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.918)), url(./assets/signback.png);
+    background-repeat: round;
+}
+.data img{
+    width: 150px;
+    margin: auto;
+}
+.data p{
+    color:white;
+    text-align: center;
+}
+.inputs{
+    text-align: center;
+    padding: 10px;
+}
+.inputs h3{
+    font-weight: bolder;
+}
+.inputs input{
+    width:90%;
+    height: 35px;
+    border: 0.5px solid rgb(150, 150, 150);
+    border-radius: 7px;
+    background-color: transparent;
+    margin-top: 30px;
+}
+
+.inputs input::grammar-error{
+border: none;
+}
+.inputs input::placeholder{
+    margin-left: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    
+}
+.inputs button{
+    border-radius: 30px;
+    width:90%;
+    height: 30px;
+    background-color: rgb(4, 39, 104);
+    color: white;
+    margin-top: 20px;
+}
+.inputs button:hover{
+    box-shadow: 0 2px 4px rgb(110, 110, 110);
+    width: 91%;
+    height: 31px ;
+}
+.inputs input:hover{
+    box-shadow: 0 2px 4px rgb(202, 202, 202);
+    border-radius: 8px;
+    background-color: rgb(235, 234, 234);
+}
