@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import logo from '../assets/logo-colored.png'
 
-const Login = () => {
+const Signin = () => {
 const [credentialsError, setCredentialserror] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -18,7 +18,7 @@ const handleSubmit = async (e) =>{
 
   try {
 
-    const FETCH = await fetch('http://localhost:666/login.php', 
+    const FETCH = await fetch('http://localhost:666/signin.php', 
       {
         method:'POST',
         headers:{
@@ -46,19 +46,19 @@ const handleSubmit = async (e) =>{
   return (
     <div className='w-screen h-screen bg-slate-900 flex'>
       
-      <div className='login'>
+      <div className='signin'>
         <div className='data'>
           <img src={logo} alt="logo" />
           <p><i>Bringing you the best of Digital Healthcare</i></p>
         </div>
         <div className='inputs'>
-          <h3>Login</h3>
+          <h3>Signin</h3>
    <form onSubmit={handleSubmit}>
           <label className='error' style={{color:'red'}}>{credentialsError}</label>
           <input type="email"  placeholder='Email' value={email} onChange={(e)=> setEmail(e.target.value)} required/>
           <input type="password" placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)} required/>
 
-          <button type='submit'>Login</button>
+          <button type='submit'>Signin</button>
           <p style={{marginTop:'20px'}}>Don't have an account? <u><i><a style={{color:'green'}} href="/signup"> Register</a></i></u></p>
           </form>
           <p style={{fontSize:'12px', marginTop:'10px'}}>Compyright &copy; Processor 2024</p>
@@ -68,4 +68,4 @@ const handleSubmit = async (e) =>{
   )
 }
 
-export default Login
+export default Signin
