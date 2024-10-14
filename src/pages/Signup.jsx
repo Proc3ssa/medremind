@@ -3,7 +3,9 @@ import logo from '../assets/logo-colored.png';
 
 const Signup = () => {
   const [emailError, setEmailError] = useState('');
+  const [emailexists, setEmailexists] = useState(false);
   const [phoneError, setPhoneError] = useState('');
+  const [phoneexists, setPhoneexists] = useState(true);
   const [passwordError, setPasswordError] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -40,11 +42,13 @@ const Signup = () => {
 
     const result = await response.json();
 
-    if (result.exist) {
+    if (result.exists) {
       if (fieldType === 'email') {
         setEmailError('Email already exists');
+        // setEmailexists(true);
       } else if (fieldType === 'text') {
-        setPhoneError('Phone already exists');
+        setPhoneError('number already exists');
+        // setPhoneexists(true);
       }
     } else {
       setEmailError('');
@@ -57,6 +61,7 @@ const Signup = () => {
 
     if (password1 !== e.target.value) {
       setPasswordError('Password mismatch');
+      return
     } else {
       setPasswordError('');
     }
@@ -64,13 +69,10 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (passwordError || emailError || phoneError) {
-     
-      return;
+    if(phoneexists || emailexists){
+      return
     }
 
-    
     const formData = {
       name: name,
       email: email,
@@ -88,12 +90,12 @@ const Signup = () => {
 
     const result = await response.json();
 
-    if (result.success) {
-      alert('Signup successful!');
-      // Optionally redirect to login or dashboard
+    if (result.signedup) {
+      alert(result.message);
+      
       window.location.href = '/login';
     } else {
-      alert('Signup failed. Please try again.');
+      alert(result.message);
     }
   };
 

@@ -14,25 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     
   
-    $email = $input['email'] ?? '';
-    $password = $input['password'] ?? '';
+    $data = $input['data'] ?? '';
+    $type = $input['type'] ?? '';
 
-
+    ($type == 'email') ? $stmt = $connction->prepare("SELECT *FROM users where email = ? ") :
+    $stmt = $connction->prepare("SELECT *FROM users where phone = ?");
    
 
-    $stmt = $connction->prepare("SELECT *FROM users where email = ? and password = ?");
-    $stmt -> bind_param("ss", $email, $password);
+    
+    $stmt -> bind_param("s", $data);
     $stmt -> execute();
     $stmt -> store_result();
 
     if($stmt -> num_rows == 1){
-      echo  json_encode(['success' => true, 'message' => 'Login successful']);
+      echo  json_encode(['exists' => true]);
 
         $stmt ->close();
         $connction -> close();
         exit;
     }
-    echo  json_encode(['success' => false, 'message' => 'Login not successful']);
+    echo  json_encode(['exists' => false]);
 
         $stmt ->close();
         $connction -> close();
@@ -40,6 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 } else {
     // Handle invalid request methods
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+    echo json_encode(['exists' => false, 'message' => 'Invalid request method']);
 }
 ?>
