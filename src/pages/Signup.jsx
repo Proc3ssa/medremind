@@ -3,9 +3,7 @@ import logo from '../assets/logo-colored.png';
 
 const Signup = () => {
   const [emailError, setEmailError] = useState('');
-  const [emailexists, setEmailexists] = useState(false);
   const [phoneError, setPhoneError] = useState('');
-  const [phoneexists, setPhoneexists] = useState(true);
   const [passwordError, setPasswordError] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -45,10 +43,8 @@ const Signup = () => {
     if (result.exists) {
       if (fieldType === 'email') {
         setEmailError('Email already exists');
-        // setEmailexists(true);
       } else if (fieldType === 'text') {
         setPhoneError('number already exists');
-        // setPhoneexists(true);
       }
     } else {
       setEmailError('');
@@ -61,7 +57,6 @@ const Signup = () => {
 
     if (password1 !== e.target.value) {
       setPasswordError('Password mismatch');
-      return
     } else {
       setPasswordError('');
     }
@@ -69,9 +64,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(phoneexists || emailexists){
-      return
-    }
 
     const formData = {
       name: name,
@@ -92,7 +84,7 @@ const Signup = () => {
 
     if (result.signedup) {
       alert(result.message);
-      
+      // Optionally redirect to login or dashboard
       window.location.href = '/login';
     } else {
       alert(result.message);
