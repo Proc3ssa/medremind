@@ -7,8 +7,17 @@
     display: flex;
     background-color: rgb(229, 230, 228);
 }
+.signup{
+    width:400px;
+    box-shadow: 0px 4px 6px rgb(17, 17, 17);
+    border-radius: 5px;
+    margin: auto;
+    
+    background-color: rgb(229, 230, 228);
+}
 
-.login div{
+
+.login div, .signup div{
     width: 99%;
     height: 100%;
 
@@ -29,6 +38,8 @@
     text-align: center;
     padding: 10px;
 }
+
+
 .inputs h3{
     font-weight: bolder;
 }
@@ -66,4 +77,10 @@ border: none;
     box-shadow: 0 2px 4px rgb(202, 202, 202);
     border-radius: 8px;
     background-color: rgb(235, 234, 234);
+}
+
+.signup .inputs h1{
+    text-align: left;
+    margin-left: 20px;
+    color:red;
 }
