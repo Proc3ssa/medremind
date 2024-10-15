@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo-colored.png';
+
 
 const Signup = () => {
   const [emailError, setEmailError] = useState('');
@@ -11,46 +11,7 @@ const Signup = () => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  const checkValidity = async (e) => {
-    e.preventDefault();
-
-    const fieldType = e.target.type;
-    const value = e.target.value;
-
-    // Update state for email/phone
-    if (fieldType === 'email') {
-      setEmail(value);
-    } else if (fieldType === 'text') {
-      setPhone(value);
-    }
-
-    const data = {
-      type: fieldType,
-      data: value,
-    };
-
-    // Rename fetch to avoid conflicts
-    const response = await fetch('http://localhost:666/checkvalidity.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-
-    if (result.exists) {
-      if (fieldType === 'email') {
-        setEmailError('Email already exists');
-      } else if (fieldType === 'text') {
-        setPhoneError('number already exists');
-      }
-    } else {
-      setEmailError('');
-      setPhoneError('');
-    }
-  };
+  
 
   const checkPassword = (e) => {
     setPassword2(e.target.value);
