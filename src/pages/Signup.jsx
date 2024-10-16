@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 
 const Signup = () => {
-  const [emailError, setEmailError] = useState('');
-  const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState({eror:false, msg:''});
+  const [phoneError, setPhoneError] = useState({eror:false, msg:''});
   const [passwordError, setPasswordError] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -11,8 +11,49 @@ const Signup = () => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
 
-  
+  // check email and phone 
+  const checkValidity = async  (e) =>{
+    e.preventDefault();
+   const data = {
+    fieldtype : e.target.type,
+    fielddata : e.target.value
+  }
 
+   data.fieldtype == 'email' ? setEmail(data.fielddata) : setPhone(data.fielddata)
+
+   
+
+    const fech = await fetch('http://localhost:666/checkvalidity.php', 
+      {
+        method:'POST',
+        headers :{
+          'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(data)
+
+      }) ;
+
+      const response = await fech.json();
+
+      if(response.exists){
+        if(data.fieldtype == 'email'){
+          setEmailError({
+            error:true,
+            msg: 'email is already in use'
+          })
+        }
+        else{
+          setPhoneError({
+            error:true,
+            msg: 'number is already in use'
+          })
+        }
+      }
+   
+
+  }
+  
+// check password 
   const checkPassword = (e) => {
     setPassword2(e.target.value);
 
@@ -26,6 +67,9 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(emailError || phoneError){
+      return
+    }
     const formData = {
       name: name,
       email: email,
@@ -73,7 +117,7 @@ const Signup = () => {
               onChange={checkValidity}
               required
             />
-            <h1>{emailError}</h1>
+            <h1>{emailError.msg}</h1>
 
             <input
               type="text"
@@ -82,7 +126,7 @@ const Signup = () => {
               onChange={checkValidity}
               required
             />
-            <h1>{phoneError}</h1>
+            <h1>{phoneError.msg}</h1>
 
             <input
               type="password"
