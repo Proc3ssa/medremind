@@ -36,6 +36,7 @@ const Signup = () => {
       const response = await fech.json();
 
       if(response.exists){
+        console.log(response.message);
         if(data.fieldtype == 'email'){
           setEmailError({
             error:true,
@@ -48,6 +49,9 @@ const Signup = () => {
             msg: 'number is already in use'
           })
         }
+      }
+      else{
+        console.log(response.message);
       }
    
 
@@ -67,7 +71,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(emailError || phoneError){
+    if(emailError.eror || phoneError.error){
       return
     }
     const formData = {

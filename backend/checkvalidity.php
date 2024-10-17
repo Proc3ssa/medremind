@@ -4,43 +4,33 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-include 'connection.php';
-
-
-
+include 'connection.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $input = json_decode(file_get_contents('php://input'), true);
+
     
-  
     $data = $input['data'] ?? '';
     $type = $input['type'] ?? '';
 
-    ($type == 'email') ? $stmt = $connction->prepare("SELECT *FROM users where email = ? ") :
-    $stmt = $connction->prepare("SELECT *FROM users where phone = ?");
-   
+    $SELECT = "";
+
+    if($type == 'email'){
+        $SELECT = "SELECT COUNT(*) FROM users WHERE email = '$data'";
+    }
+    else{
+        $SELECT = "SELECT COUNT(*) FROM users WHERE phone = '$data'";
+    }
+
+    $query = mysqli_query($connection, $SELECT);
+    $res = mysqli_fetch_assoc($query);
+    $count = $res['COUNT(*)'];
 
     
-    $stmt -> bind_param("s", $data);
-    $stmt -> execute();
-    $stmt -> store_result();
-
-    if($stmt -> num_rows > 0 ){
-      echo  json_encode(['exists' => true]);
-
-        $stmt ->close();
-        $connction -> close();
-        exit;
-    }
-    echo  json_encode(['exists' => false]);
-
-        $stmt ->close();
-        $connction -> close();
-        exit;
-
-} else {
-    // Handle invalid request methods
+}
+else{
     echo json_encode(['exists' => false, 'message' => 'Invalid request method']);
 }
 ?>
+ 
