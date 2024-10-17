@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
 
     
-    $data = $input['data'] ?? '';
-    $type = $input['type'] ?? '';
+    $data = $input['fielddata'] ?? '';
+    $type = $input['fieldtype'] ?? '';
 
     $SELECT = "";
 
@@ -26,6 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = mysqli_query($connection, $SELECT);
     $res = mysqli_fetch_assoc($query);
     $count = $res['COUNT(*)'];
+
+    if($count > 0){
+        echo json_encode(['exists' => true, 'message' => 'already exists', 'value' => $count]);
+    }
+    else{
+        echo json_encode(['exists' => false, 'message' => 'does not exist', 'value' => $count]);
+    }
 
     
 }

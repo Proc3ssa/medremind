@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $input['password'] ?? '';
     $id = rand(999,10000);
 
-    $stmt = $connction->prepare("INSERT INTO users (id,name, password, email, phone) values(?,?,?,?,?)");
+    $stmt = $connection->prepare("INSERT INTO users (id,name, password, email, phone) values(?,?,?,?,?)");
    
 
     
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       echo  json_encode(['signedup' => true, 'message' => 'You have successfully signed']);
 
         $stmt ->close();
-        $connction -> close();
+        $connection -> close();
         exit;
     }
     else{
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo  json_encode(['signedup' => false]);
 
         $stmt ->close();
-        $connction -> close();
+        $connection -> close();
         exit;
     }
 

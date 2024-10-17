@@ -84,3 +84,13 @@ border: none;
     margin-left: 20px;
     color:red;
 }
+.success{
+    background-color: rgba(190, 245, 208, 0.822);
+    color:green;
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+    border-right: 1px solid green;
+    border-bottom: 1px solid green;
+    box-shadow: 0 3px 4px rgb(196, 197, 196);
+}

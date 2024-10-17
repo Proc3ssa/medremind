@@ -4,12 +4,13 @@ import React, { useState } from 'react';
 const Signup = () => {
   const [emailError, setEmailError] = useState({eror:false, msg:''});
   const [phoneError, setPhoneError] = useState({eror:false, msg:''});
-  const [passwordError, setPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState({eror:false, msg:''});
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
+  const [message,setMessage] = useState('');
 
   // check email and phone 
   const checkValidity = async  (e) =>{
@@ -36,22 +37,34 @@ const Signup = () => {
       const response = await fech.json();
 
       if(response.exists){
-        console.log(response.message);
+        console.log(response.exists);
         if(data.fieldtype == 'email'){
           setEmailError({
-            error:true,
+            eror:true,
             msg: 'email is already in use'
           })
         }
         else{
           setPhoneError({
-            error:true,
+            eror:true,
             msg: 'number is already in use'
           })
         }
       }
       else{
-        console.log(response.message);
+        console.log(response.exists);
+        if(data.fieldtype == 'email'){
+          setEmailError({
+            eror:false,
+            msg: ''
+          })
+        }
+        else{
+          setPhoneError({
+            eror:false,
+            msg: ''
+          })
+        }
       }
    
 
@@ -62,18 +75,21 @@ const Signup = () => {
     setPassword2(e.target.value);
 
     if (password1 !== e.target.value) {
-      setPasswordError('Password mismatch');
+      setPasswordError({eror:true, msg:'password mismatch'});
     } else {
-      setPasswordError('');
+      setPasswordError({eror:false, msg:''});
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(emailError.eror || phoneError.error){
+    console.log(emailError, phoneError, passwordError);
+
+    if(emailError.eror || phoneError.eror || passwordError.eror){
       return
     }
+
     const formData = {
       name: name,
       email: email,
@@ -92,9 +108,10 @@ const Signup = () => {
     const result = await response.json();
 
     if (result.signedup) {
-      alert(result.message);
-      // Optionally redirect to login or dashboard
-      window.location.href = '/login';
+      setMessage('You have successfully created an account')
+      setTimeout( () =>{
+        window.location.href = '/login';
+      }, 2000)
     } else {
       alert(result.message);
     }
@@ -105,6 +122,7 @@ const Signup = () => {
       <div className="signup">
         <div className="inputs">
           <h3>Signup</h3>
+          <h4 className='success'>{message}</h4>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -147,7 +165,7 @@ const Signup = () => {
               onChange={checkPassword}
               required
             />
-            <h1>{passwordError}</h1>
+            <h1>{passwordError.msg}</h1>
 
             <button type="submit">Signup</button>
             <p style={{ marginTop: '20px' }}>
