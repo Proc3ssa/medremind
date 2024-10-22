@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    
 
-    $stmt = $connction->prepare("SELECT *FROM users where email = ? and password = ?");
+    $stmt = $connection->prepare("SELECT *FROM users where email = ? and password = ?");
     $stmt -> bind_param("ss", $email, $password);
     $stmt -> execute();
     $stmt -> store_result();
@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       echo  json_encode(['success' => true, 'message' => 'Login successful']);
 
         $stmt ->close();
-        $connction -> close();
+        $connection -> close();
         exit;
     }
     echo  json_encode(['success' => false, 'message' => 'Login not successful']);
 
         $stmt ->close();
-        $connction -> close();
+        $connection -> close();
         exit;
 
 } else {

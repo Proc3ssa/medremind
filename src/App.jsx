@@ -1,5 +1,5 @@
 import { Route, RouterProvider, createRoutesFromElements, createBrowserRouter } from 'react-router-dom'
-import { useState } from 'react'
+
 import Index from './pages/Index'
 import './App.css'
 

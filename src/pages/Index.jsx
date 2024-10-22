@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo-trans.png';
 
  
 
 const Index = () => {
-
+const navigate = useNavigate();
 setTimeout( ()=>{
-  window.location.href = '/login';
+  navigate('/login');
 }, 2000)
 
   return (

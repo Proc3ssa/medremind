@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [emailError, setEmailError] = useState({eror:false, msg:''});
   const [phoneError, setPhoneError] = useState({eror:false, msg:''});
   const [passwordError, setPasswordError] = useState({eror:false, msg:''});
@@ -110,7 +112,7 @@ const Signup = () => {
     if (result.signedup) {
       setMessage('You have successfully created an account')
       setTimeout( () =>{
-        window.location.href = '/login';
+       navigate('/verify');
       }, 2000)
     } else {
       alert(result.message);
