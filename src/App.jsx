@@ -2,7 +2,7 @@ import { Route, RouterProvider, createRoutesFromElements, createBrowserRouter } 
 
 import Index from './pages/Index'
 import './App.css'
-
+import SMSverify from './pages/SMS_erify'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -13,6 +13,7 @@ function App() {
     <Route path='/' element={<Index/>} />
     <Route path='/login' element={<Login />} />
     <Route path='/signup' element={<Signup />} />
+    <Route path='/verify' element={<SMSverify />} />
       
     </>
     )

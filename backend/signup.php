@@ -54,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     if($stmt -> execute()){
+
+        session_start();
+        $_SESSION['code'] =  $id;
+
       echo  json_encode(['signedup' => true, 'message' => 'You have successfully signed']);
 
       new_sms($SMS, $phone);
