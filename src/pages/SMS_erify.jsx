@@ -1,8 +1,21 @@
-import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import React, {useState, useEffect} from 'react'
+
 
 
 const SMSverify = () => {
+const navigate = useNavigate();
+
+useEffect(()=>{
+    if(!document.cookie.includes("username=")){
+        navigate('/signup');
+       }
+},[])
+    
+
+
 const [code, setCode] = useState('');
+const [message , setMessage] = useState('A verification code has been sent to your phone, enter it to activate your account')
 const [codeError, setCodeError] = useState('');
 const [isdisabled, setIsdisabled] = useState(true);
 const [btnbgcolor, setbtnbgcolor] = useState({
@@ -36,7 +49,9 @@ const handleCode = (e) =>{
 const handleSubmit = async (e) =>{
   e.preventDefault();
   
- 
+ const formdata = {
+    code : code
+ }
 
   try {
 
@@ -46,17 +61,30 @@ const handleSubmit = async (e) =>{
         headers:{
           'Content-Type':'application/json'
         },
-        body: code
+        body: JSON.stringify(formdata)
       }
       
     );
 
     const response = await FETCH.json();
 
+
+    if(response.status){
+     setMessage("Your account is now verified");
+     {
+        setTimeout(() =>{
+            navigate('/login');
+        },3000)
+     }
+     
+    }
+    else{
+        setCodeError('Code is incorrect');
+    }
    
     
   } catch (error) {
-    
+    setCodeError('Internal server error')
   }
 
 }
@@ -70,7 +98,7 @@ const handleSubmit = async (e) =>{
           <h3>Verify Phone</h3>
    <form onSubmit={handleSubmit}>
           <label className='error' style={{color:'red'}}>
-            <p className='text-black'>A verification code has been sent to your phone, enter it to activate your account</p>
+            <p className='text-black'>{message}</p>
             {codeError}</label>
           <input type="number"  placeholder='code' value={code} onChange={handleCode} required/>
         
@@ -85,4 +113,4 @@ const handleSubmit = async (e) =>{
   )
 }
 
-export default SMSverify
+export default SMSverify;

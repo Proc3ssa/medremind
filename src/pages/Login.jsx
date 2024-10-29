@@ -23,7 +23,7 @@ const handleSubmit = async (e) =>{
   const credentials = {
     email:email,
     password:password
-  }
+  };
   console.log(credentials);
 
   try {

@@ -44,12 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $input['password'] ?? '';
     $id = rand(999,10000);
     $SMS = "Use the code $id to verify you account";
+    $status = "Not verified";
 
-    $stmt = $connection->prepare("INSERT INTO users (id,name, password, email, phone) values(?,?,?,?,?)");
+    $stmt = $connection->prepare("INSERT INTO users (id,name, password, email, phone, status) values(?,?,?,?,?,?)");
    
 
     
-    $stmt -> bind_param("issss", $id, $name, $password, $email, $phone);
+    $stmt -> bind_param("isssss", $id, $name, $password, $email, $phone, $status);
     ;
     
 

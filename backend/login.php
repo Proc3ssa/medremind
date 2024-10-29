@@ -20,21 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    
 
-    $stmt = $connection->prepare("SELECT *FROM users where email = ? and password = ?");
-    $stmt -> bind_param("ss", $email, $password);
-    $stmt -> execute();
-    $stmt -> store_result();
+    $query = mysqli_query($connection, "SELECT *FROM users where email = '$email' and password = '$password'");
+    
+    $result = mysqli_fetch_assoc($query);
 
-    if($stmt -> num_rows == 1){
-      echo  json_encode(['success' => true, 'message' => 'Login successful']);
+    if($query -> num_rows == 1){
+      if($result['status'] == 'Verified'){
+        echo  json_encode(['success' => true, 'message' => 'Login successful']);
 
         $stmt ->close();
         $connection -> close();
         exit;
+      }
+      else{
+        echo  json_encode(['success' => false, 'message' => 'Your Account has not been verified. check your phone for verification code.']);
+      }
     }
     echo  json_encode(['success' => false, 'message' => 'Login not successful']);
 
-        $stmt ->close();
+            
         $connection -> close();
         exit;
 

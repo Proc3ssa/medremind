@@ -14,6 +14,13 @@ const Signup = () => {
   const [password2, setPassword2] = useState('');
   const [message,setMessage] = useState('');
 
+  const setCookie = (name,value, hours) =>{
+    let date = new Date();
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+    let expires = "expires" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+  }
+
   // check email and phone 
   const checkValidity = async  (e) =>{
     e.preventDefault();
@@ -111,6 +118,8 @@ const Signup = () => {
 
     if (result.signedup) {
       setMessage('You have successfully created an account')
+      setCookie('username', formData.name, 1);
+      setCookie('verify', '', )
       setTimeout( () =>{
        navigate('/verify');
       }, 2000)
