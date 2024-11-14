@@ -68,6 +68,18 @@ border: none;
     color: white;
     margin-top: 20px;
 }
+
+.edit button{
+    border-radius: 30px;
+    width:90%;
+    height: 30px;
+    background-color: #042768;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
 .inputs button:hover{
     box-shadow: 0 2px 4px rgb(110, 110, 110);
     width: 91%;
@@ -85,7 +97,7 @@ border: none;
     color:red;
 }
 .success{
-    background-color: rgba(190, 245, 208, 0.822);
+    background-color: rgba(5, 141, 51, 0.219);
     color:green;
     width: 90%;
     margin: auto;
@@ -103,7 +115,7 @@ fieldset{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:20px;
+    gap:10px;
     flex-wrap: wrap;
 }
 .prescriptions{
@@ -112,9 +124,19 @@ fieldset{
     margin: 10px auto;
     height: fit-content;
 }
+.prescriptions input[type="date"],.prescriptions input[type="time"]{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 35px;
+    border: 0.5px solid rgb(150, 150, 150);
+    border-radius: 7px;
+    background-color: transparent;
+   
+}
 
 
-.edit button[type='button']{
+.edit option{
     border-radius: 5px;
     border: 0.5px solid gray;
     width:40%;
@@ -124,3 +146,36 @@ fieldset{
 button h3 , button p{
     z-index: -5;
 }
+.dates{
+    margin-top: 20px;
+    display: block;
+    text-align: left;
+    width: 100%;
+   
+}
+
+
+
+
+.edit input[type="radio"] {
+    display: none;
+  }
+
+  /* Style the labels to look like buttons */
+  .edit .radio-button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    box-shadow: 1px 2px 6px grey;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 5px;
+    min-width: 150px;
+  }
+
+  /* Change style when radio button is checked */
+  .edit input[type="radio"]:checked + label {
+    background-color: #072341;
+    color: #ffffff;
+  }

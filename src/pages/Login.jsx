@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import logo from '../assets/logo-colored.png'
 import { ThreeDots } from 'react-loader-spinner'; // Assuming you're using Circles spinner
-
+import Cookies from 'js-cookie';
 
 const Login = () => {
 const [credentialsError, setCredentialserror] = useState('');
@@ -42,6 +42,8 @@ const handleSubmit = async (e) =>{
     const response = await FETCH.json();
 
     if(response.success){
+      Cookies.set('user', email, { expires: 7 });
+       
       setCredentialserror('Correct credentials');
     }
     else{
