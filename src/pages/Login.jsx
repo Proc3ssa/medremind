@@ -34,7 +34,7 @@ const handleSubmit = async (e) =>{
         headers:{
           'Content-Type':'application/json'
         },
-        body: JSON.stringify(credentials)
+        body:JSON.stringify(credentials)
       }
       
     );
@@ -50,7 +50,7 @@ const handleSubmit = async (e) =>{
     }
     
   } catch (error) {
-    setCredentialserror(error.message);
+    setCredentialserror("catch:" + error.message);
   }
 
 }

@@ -34,16 +34,16 @@
     color:white;
     text-align: center;
 }
-.inputs{
+.inputs,.edit{
     text-align: center;
     padding: 10px;
 }
 
 
-.inputs h3{
+.inputs, .edit h3{
     font-weight: bolder;
 }
-.inputs input{
+.inputs input[type="text"],input[type="email"], input[type="password"]{
     width:90%;
     height: 35px;
     border: 0.5px solid rgb(150, 150, 150);
@@ -93,4 +93,34 @@ border: none;
     border-right: 1px solid green;
     border-bottom: 1px solid green;
     box-shadow: 0 3px 4px rgb(196, 197, 196);
+}
+fieldset{
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    flex-wrap: wrap;
+}
+.prescriptions{
+   
+    width:90%;
+    margin: 10px auto;
+    height: fit-content;
+}
+
+
+.edit button[type='button']{
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    width:40%;
+    height: 50px;
+}
+
+button h3 , button p{
+    z-index: -5;
 }
