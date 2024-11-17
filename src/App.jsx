@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Add from './pages/add'
 
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,7 +17,7 @@ function App() {
     <Route path='/signup' element={<Signup />} />
     <Route path='/add' element={<Add />} />
     <Route path='/verify' element={<SMSverify />} />
-      
+    
     </>
     )
   )

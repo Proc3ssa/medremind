@@ -178,4 +178,5 @@ button h3 , button p{
   .edit input[type="radio"]:checked + label {
     background-color: #072341;
     color: #ffffff;
+    height: 70px;
   }

@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_fetch_assoc($query);
 
     if($query -> num_rows == 1){
-      // if($result['status'] == 'Verified'){
-      //   echo  json_encode(['success' => true, 'message' => 'Login successful']);
+      if($result['status'] == 'Verified'){
+        echo  json_encode(['success' => true, 'message' => 'Login successful']);
 
-      // }
-      // else{
-      //   echo  json_encode(['success' => false, 'message' => 'Your Account has not been verified. check your phone for verification code.']);
-      // }
+      }
+      else{
+        echo  json_encode(['success' => false, 'message' => 'Your Account has not been verified. check your phone for verification code.']);
+      }
 
       echo json_encode(['success' => true, 'message' => 'login successfull']);
 

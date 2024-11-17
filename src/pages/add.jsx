@@ -1,62 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import { Await, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-
 const Add = () => {
-  
-  const navigate = useNavigate()
-  
-   const user = Cookies.get('user');
+  const navigate = useNavigate();
+  const user = Cookies.get('user');
 
-   if(!user){
-      useEffect(()=>{
-        navigate('/login?from=add')
-      },[])
-   }
-   const datetime = new Date();
-   const today = datetime.toISOString().split('T')[0];
-   const [prescription, setPrescription] = useState('');
-   const [date, setDate] = useState('');
-   const [to, setTo] = useState('');
-   const [from, setFrom] = useState('');
-   const [message, setMessage] = useState('');
+  // Redirect if user is not found
+  useEffect(() => {
+    if (!user) {
+      navigate('/login?from=add');
+    }
+  }, [user, navigate]);
 
-   function getcolor() {
+  const datetime = new Date();
+  const today = datetime.toISOString().split('T')[0];
+  const [prescriptions, setPrescriptions] = useState([]);
+  const [prescriptionValue, setPrescriptionValue] = useState('');
+  
+  const [date, setDate] = useState('');
+  const [to, setTo] = useState('');
+  const [from, setFrom] = useState('');
+  const [message, setMessage] = useState('');
+  const [PreError, setPreError] = useState('');
+  const [submit, setsubmit] = useState(false);
+
+  
+  function getcolor() {
     const color = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     const opacity = 80;
-
     return `#${color}${opacity}`;
   }
-  
-  const  getPrescriptions = async () =>{
-      
-      try {
-        const getPre = await fetch(`localhost:666/getprescription.php?user=${user}` , {
-          method : 'GET',
-          headerd : {
-            'Content-type' : 'application/json'
-          }
-          });
 
-          setPrescription(await getPre.json());
-        
-      } catch (error) {
-        setMessage('could not fetch prescriptions')
-      }
+  const prescriptionSelect = (e) =>{
+    setPrescriptionValue(e.target.value);
+    
+    setPreError('')
   }
 
-  getPrescriptions();
   
-  
-  
-  
-   const handleSubmit = () =>{
+  useEffect(() => {
+    const getPrescriptions = async () => {
+      try {
+        const response = await fetch(`http://localhost:666/getprescription.php?user=${user}`, {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setPrescriptions(data);
+        } else {
+          setMessage('Could not fetch prescriptions');
+        }
+      } catch (error) {
+        setMessage('Could not fetch prescriptions');
+      }
+    };
 
+    if (user) {
+      getPrescriptions();
+    }
+  }, [user]);
+  
+const handleSubmit = async (e) =>{
+  e.preventDefault();
+
+  if(prescription == ""){
+    setPreError('Select a prescription');
+    setsubmit(false);
+  }
+  else{
+    setsubmit(true);
+
+    const data = {
+      prescriptionValue : prescriptionValue,
+      to : to,
+      from : from,
+      user : user,
+      date : date
     }
 
+    if(setsubmit){
+      try {
+        const Submit = await fetch(`http:localhost:666/add.php`, {
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json',
+            body: JSON.stringify(data)
+          }
+        });
   
+        const response = await Submit.json()
+  
+      } catch (error) {
+        console.log('fetch error');
+      }
+    }
+  }
 
+}
   
 
 
@@ -73,35 +116,27 @@ const Add = () => {
             <section className='prescriptions'>
                 <fieldset>
                     <legend>Prescriptions</legend>
+
+                    {
+                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.medicine + ',' + prescription.dossage} />
+                        <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" onClick={prescriptionSelect}><h3>{prescription.medicine}</h3> 
+                        <p>{prescription.dossage}</p></label></>)
+                    )
+                    }
                    
-                    <input type="radio" id="option1" name="options" value="Option 1" />
-                    <label for="option1" style={{backgroundColor:getcolor()}}class="radio-button"><h3>Amoxicillen</h3> 
-                    <p>26mg</p></label>
-
-                    <input type="radio" id="option2" name="options" value="Option 2" />
-                    <label for="option2" class="radio-button"><h3>Amoxicillen</h3> 
-                    <p>26mg</p></label>
-
-                    <input type="radio" id="option3" name="options" value="Option 3" />
-                    <label for="option3" class="radio-button"><h3>Amoxicillen</h3> 
-                    <p>26mg</p></label>
-
-                    {/* <option  className='prescription' >
-                        <h3>Amoxicillen</h3> 
-                        <p>26mg</p>
-                    </option> */}
+                      <p style={{color:'red'}}>{PreError}</p>
                     
                 </fieldset>
 
                 <section className='dates'>
                   <label htmlFor=""><b>Date</b></label><p></p>
-                <input type="date" name="" id="" min={today} value={date} onChange={(e) => setDate(e.target.value)}/>
+                <input type="date" name="" id="" min={today} value={date} onChange={(e) => setDate(e.target.value)} required/>
                 <label htmlFor=""><b>Time</b></label><p></p>
                 <p>from</p>
-                <input type="time" name="" id="" onChange={(e) => setFrom(e.target.value)} value={from}/>
+                <input type="time" name="" id="" onChange={(e) => setFrom(e.target.value)} value={from} required/>
 
                 <p>to</p>
-                <input type="time" name="" id="" value={to} onChange={(e) => setTo(e.target.value)}/>
+                <input type="time" name="" id="" value={to} onChange={(e) => setTo(e.target.value)} required/>
                 </section>
                  
                 
