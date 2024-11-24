@@ -6,6 +6,7 @@ import SMSverify from './pages/SMS_erify'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Add from './pages/add'
+import Edit from './pages/edit'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <Route path='/login' element={<Login />} />
     <Route path='/signup' element={<Signup />} />
     <Route path='/add' element={<Add />} />
+    <Route path='/edit' element={<Edit />} />
     <Route path='/verify' element={<SMSverify />} />
     
     </>

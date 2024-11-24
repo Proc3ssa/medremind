@@ -41,14 +41,14 @@ const handleSubmit = async (e) =>{
 
     const response = await FETCH.json();
 
-    if(response.success){
+    if(response.ok){
       Cookies.set('user', email, { expires: 7 });
        
-      setCredentialserror('Correct credentials');
+      setCredentialserror(response.message);
     }
     else{
       setisLoading(false);
-      setCredentialserror('wrong credentials')
+      setCredentialserror(response.message)
     }
     
   } catch (error) {

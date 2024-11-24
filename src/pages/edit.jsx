@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const Add = () => {
+const Edit = () => {
   const navigate = useNavigate();
   const user = Cookies.get('user');
-
-  // Redirect if user is not found
-  useEffect(() => {
-    if (!user) {
-      navigate('/login?from=add');
-    }
-  }, [user]);
+  const location = useLocation();
+  const params  = new URLSearchParams(location.search);
+  const reminderid = params.get("reminderid");
 
   const datetime = new Date();
   const today = datetime.toISOString().split('T')[0];
@@ -24,6 +20,43 @@ const Add = () => {
   const [message, setMessage] = useState('');
   const [PreError, setPreError] = useState('');
   const [submit, setsubmit] = useState(false);
+  const [PresID, setPresID] = useState('');
+  // Redirect if user is not found
+  useEffect(() => {
+    if (!user) {
+      navigate('/login?from=edit');
+    }
+  }, [user]);
+
+
+//   get reminder
+
+useEffect(() => {
+    const getreminder = async () => {
+      try {
+        const getRem = await fetch(`http://localhost:666/getreminder.php?reminderid=${reminderid}`);
+
+        if (getRem.ok) {
+          const Remdata = await getRem.json();
+          console.log('Remdat', Remdata);
+          setDate(Remdata.date);
+          setTo(Remdata.time2);
+          setFrom(Remdata.time)
+          setPresID(Remdata.id);
+        } else {
+          setMessage('Could not fetch reminder');
+        }
+      } catch (error) {
+        setMessage('Could not fetch reminder');
+      }
+    };
+
+    if (reminderid) {
+      getreminder();
+    }
+  }, []);
+//
+
 
   
   function getcolor() {
@@ -86,21 +119,19 @@ const handleSubmit = async (e) =>{
         const Submit = await fetch(`http://localhost:666/new.php`, {
           method : 'POST',
           headers : {
-            'Content-Type' : 'application/json'
-            },
+            'Content-Type' : 'application/json',
             body: JSON.stringify(data)
+          }
         });
   
-        const response = await Submit.json();
-
-        console.log(response);
+        const response = await Submit.json()
   
       } catch (error) {
         console.log('fetch error');
       }
 
       finally{
-        // console.log(data)
+        console.log(data)
       }
     }
   }
@@ -114,7 +145,7 @@ const handleSubmit = async (e) =>{
     <div className="w-screen h-screen bg-slate-900 flex">
       <div className="signup">
         <div className="edit">
-          <h3>New Reminder</h3>
+          <h3>Edit Reminder</h3>
           <h4 className='success'>{message}</h4>
           <form onSubmit={handleSubmit}>
 
@@ -124,8 +155,17 @@ const handleSubmit = async (e) =>{
                     <legend>Prescriptions</legend>
 
                     {
-                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.medicine + ',' + prescription.dossage} onClick={prescriptionSelect}/>
-                        <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" ><h3>{prescription.medicine}</h3> 
+                      prescriptions.map((prescription, id) =>(
+                      
+                      <><input type="radio" id={id} name="options" value={prescription.medicine + ',' + prescription.dossage} />
+                        <label for={id} 
+                        
+                        style={{
+                            backgroundColor:getcolor()
+                            
+
+                        }} 
+                        class="radio-button" onClick={prescriptionSelect}><h3>{prescription.medicine}</h3> 
                         <p>{prescription.dossage}</p></label></>)
                     )
                     }
@@ -164,4 +204,4 @@ const handleSubmit = async (e) =>{
   );
 };
 
-export default Add;
+export default Edit;
