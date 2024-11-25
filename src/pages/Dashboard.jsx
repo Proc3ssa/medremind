@@ -13,8 +13,8 @@ const Dashboard = () => {
     <Header />
     <Months />
     <Dates />
-    <Body />
-    <Footer />
+     <Body />
+   <Footer />
     
     </div>
 
