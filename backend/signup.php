@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $input['phone'] ?? '';
     $password = $input['password'] ?? '';
     $id = rand(999,10000);
-    $SMS = "Use the code $id to verify you account";
+    $SMS = "$id is your activation code";
     $status = "Not verified";
 
     $stmt = $connection->prepare("INSERT INTO users (id,name, password, email, phone, status) values(?,?,?,?,?,?)");
