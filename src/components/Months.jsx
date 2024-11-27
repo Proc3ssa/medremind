@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import injection from '../assets/injection.png'
-import medicine from '../assets/medicine.jpeg'
+import medicine from '../assets/capsule.png'
 
 const Months = () => {
     const date = new Date(); 

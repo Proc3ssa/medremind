@@ -12,6 +12,7 @@ import Signup from './pages/Signup'
 import Add from './pages/add'
 import Edit from './pages/edit'
 import Dashboard from './pages/Dashboard'
+import Addprescription from './pages/Addprescription'
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     <Route path='/edit' element={<Edit />} />
     <Route path='/verify' element={<SMSverify />} />
     <Route path='/dashboard' element={<Dashboard />} />
-    
+    <Route path='/new-prescription' element={<Addprescription />} />
     </>
     )
   )
