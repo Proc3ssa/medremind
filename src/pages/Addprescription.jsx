@@ -41,8 +41,8 @@ const Addprescription = () => {
 
   const prescriptionSelect = (e) =>{
     setType(e.target.value);
-    
-    setPreError('')
+    setsubmit(true)
+   
   }
 
   
@@ -51,7 +51,7 @@ const Addprescription = () => {
 const handleSubmit = async (e) =>{
   e.preventDefault();
 
-  if(prescriptionValue == ""){
+  if(type == ""){
     setPreError('Select a prescription');
     setsubmit(false);
   }
@@ -60,15 +60,16 @@ const handleSubmit = async (e) =>{
 
     const data = {
       prescriptionValue : prescriptionValue,
-      to : to,
-      from : from,
-      user : user,
-      date : date
+      name : name,
+      type : type,
+      amount : amount,
+      dossage : dossage,
+      user : user
     }
 
     if(setsubmit){
       try {
-        const Submit = await fetch(`http://localhost:666/new.php`, {
+        const Submit = await fetch(`http://localhost:666/new-prescription.php`, {
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'
@@ -77,7 +78,13 @@ const handleSubmit = async (e) =>{
         });
   
         const response = await Submit.json();
-
+        if(response){
+            setMessage(response.message)
+        }
+        else{
+            setMessage(response.message)
+        }
+        
         console.log(response);
   
       } catch (error) {
@@ -86,6 +93,7 @@ const handleSubmit = async (e) =>{
 
       finally{
         // console.log(data)
+        
       }
     }
   }
@@ -121,7 +129,7 @@ const handleSubmit = async (e) =>{
 
                 <section className='dates'>
                   <label htmlFor=""><b>Prescription name</b></label><p></p>
-                <input type="text" name="" id=""  value={type} onChange={(e) => setName(e.target.value)} required/>
+                <input type="text" name="" id=""  value={name} onChange={(e) => setName(e.target.value)} required/>
                 <label htmlFor=""><b>Number of {type}s</b></label><p></p>
                 
                 <input type="number" name="" id="" onChange={(e) => setAmount(e.target.value)} value={amount} required  />
