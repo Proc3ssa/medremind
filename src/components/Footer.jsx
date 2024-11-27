@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 
 const Footer = () => {
@@ -13,10 +13,10 @@ const Footer = () => {
                     <i className="fa fa-bell-o"></i> 
                     <span>Reminders</span>
                 </li>
-                <li className=''>
+                <a href='/new-prescription'><li className=''>
                     <i className="fa fa-plus"></i> Add prescription
                     <span></span>
-                </li>
+                </li></a>
                 {/* <li>
                     <i className="fa fa-user-md"></i>
                     <span>Treatments</span>

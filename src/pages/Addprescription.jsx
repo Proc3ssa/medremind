@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import capsule from '../assets/capsule.png'
+import injection from '../assets/injection.png'
+import syrup from '../assets/cough-syrup.png'
 
 const Addprescription = () => {
   const navigate = useNavigate();
@@ -15,14 +18,18 @@ const Addprescription = () => {
 
   const datetime = new Date();
   const today = datetime.toISOString().split('T')[0];
-  const [prescriptions, setPrescriptions] = useState([]);
+  const [prescriptions, setPrescriptions] = useState([
+    {type : 'Pill', img : capsule},
+    {type : 'Injection', img : injection},
+    {type : 'Syrup', img : syrup}
+  ]);
   const [prescriptionValue, setPrescriptionValue] = useState('');
   
-  const [date, setDate] = useState('');
-  const [to, setTo] = useState('');
-  const [from, setFrom] = useState('');
+  const [type, setType] = useState('');
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
-  const [PreError, setPreError] = useState('');
+  const [dossage, setdossage] = useState('');
   const [submit, setsubmit] = useState(false);
 
   
@@ -33,35 +40,13 @@ const Addprescription = () => {
   }
 
   const prescriptionSelect = (e) =>{
-    setPrescriptionValue(e.target.value);
+    setType(e.target.value);
     
     setPreError('')
   }
 
   
-  useEffect(() => {
-    const getPrescriptions = async () => {
-      try {
-        const response = await fetch(`http://localhost:666/getprescription.php?user=${user}`, {
-          headers: {
-            'Content-type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setPrescriptions(data);
-        } else {
-          setMessage('Could not fetch prescriptions');
-        }
-      } catch (error) {
-        setMessage('Could not fetch prescriptions');
-      }
-    };
-
-    if (user) {
-      getPrescriptions();
-    }
-  }, []);
+  
   
 const handleSubmit = async (e) =>{
   e.preventDefault();
@@ -114,35 +99,35 @@ const handleSubmit = async (e) =>{
     <div className="w-screen h-screen bg-slate-900 flex">
       <div className="signup">
         <div className="edit">
-          <h3>New Reminder</h3>
+          <h3>New Prescription</h3>
           <h4 className='success'>{message}</h4>
           <form onSubmit={handleSubmit}>
 
             
             <section className='prescriptions'>
-                <fieldset>
-                    <legend>Prescriptions</legend>
+                
+                    <h3>Prescription Type</h3><p>- </p>
 
                     {
-                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.medicine + ',' + prescription.dossage} onClick={prescriptionSelect}/>
-                        <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" ><h3>{prescription.medicine}</h3> 
-                        <p>{prescription.dossage}</p></label></>)
+                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.type} onClick={prescriptionSelect}/>
+                        <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" ><h3>{prescription.type}</h3> 
+                        <p><img src={prescription.img} width={30} /></p></label></>)
                     )
                     }
                    
-                      <p style={{color:'red'}}>{PreError}</p>
+                     
                     
-                </fieldset>
+                
 
                 <section className='dates'>
-                  <label htmlFor=""><b>Date</b></label><p></p>
-                <input type="date" name="" id="" min={today} value={date} onChange={(e) => setDate(e.target.value)} required/>
-                <label htmlFor=""><b>Time</b></label><p></p>
-                <p>from</p>
-                <input type="time" name="" id="" onChange={(e) => setFrom(e.target.value)} value={from} required/>
+                  <label htmlFor=""><b>Prescription name</b></label><p></p>
+                <input type="text" name="" id=""  value={type} onChange={(e) => setName(e.target.value)} required/>
+                <label htmlFor=""><b>Number of {type}s</b></label><p></p>
+                
+                <input type="number" name="" id="" onChange={(e) => setAmount(e.target.value)} value={amount} required  />
 
-                <p>to</p>
-                <input type="time" name="" id="" value={to} onChange={(e) => setTo(e.target.value)} required/>
+                <label htmlFor=""><b>Dossage</b></label><p></p>
+                <input type="text" name="" id="" value={dossage} onChange={(e) => setdossage(e.target.value)} required  placeholder='e,g 12ml'/>
                 </section>
                  
                 

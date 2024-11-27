@@ -124,7 +124,8 @@ fieldset{
     margin: 10px auto;
     height: fit-content;
 }
-.prescriptions input[type="date"],.prescriptions input[type="time"]{
+.prescriptions input[type="date"],.prescriptions input[type="time"],.prescriptions input[type="text"],
+.prescriptions input[type="number"]{
     margin-top: 5px;
     margin-bottom: 15px;
     width: 100%;
