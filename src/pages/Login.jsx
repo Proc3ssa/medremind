@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
 import logo from '../assets/logo-colored.png'
-import { ThreeDots } from 'react-loader-spinner'; // Assuming you're using Circles spinner
+import { ThreeDots } from 'react-loader-spinner';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 const [credentialsError, setCredentialserror] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [isloading, setisLoading] = useState(false)
+const navigate = useNavigate();
 
 
 
@@ -43,8 +45,7 @@ const handleSubmit = async (e) =>{
 
     if(response.ok){
       Cookies.set('user', email, { expires: 7 });
-       
-      setCredentialserror(response.message);
+       navigate('/dashboard')
     }
     else{
       setisLoading(false);

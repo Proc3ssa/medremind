@@ -1,6 +1,6 @@
 body
 {
-    background-color: #f5f6fa;
+    background-color: #dfe1eb;
     font-family: Roboto;
 }
 
@@ -15,9 +15,9 @@ body
 {
     font-size: 16px;
     font-weight: 500;
-    color: rgba(0,0,0,0.9);
+    color: rgba(250, 250, 250, 0.9);
     padding: 30px 25px;
-    background-color: #fff;
+    background-color: #6868a7;
 }
 
 #mra_header_bar .mra_header_icon
@@ -35,7 +35,7 @@ body
 #mra_months_bar
 {
     position: relative;
-    background-color: #fff;
+    background-color: #e4e7f5;
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.08);
     overflow: hidden;
@@ -134,7 +134,7 @@ body
     width: 80%;
     margin: 14px 0px;
     padding: 15px 0;
-    background-color: #f5f6fa;
+    background-color: #dbdbe9;
     border-radius: 8px;
 }
 
@@ -228,7 +228,7 @@ body
     font-size: 12px;
     font-weight: 500;
     color: rgba(9,16,255,1);
-    background-color: rgba(9,16,255,0.08);
+    background-color: rgba(9, 17, 255, 0.096);
     padding: 5px;
     border-radius: 8px;
     margin-top: -5px;
@@ -464,6 +464,15 @@ body
     color: #fff;
     box-shadow: 10px 10px 15px -5px rgba(9,16,255, 0.3);
 }
+.btnAdd:hover{
+    color:#969390;
+    box-shadow: 10px 10px 15px -5px rgba(64, 64, 66, 0.3);
+    width: 50px;
+    height: 50px;
+    
+}
+
+
 
 
 /** End Section Footer Style **/

@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const Footer = () => {
+    const navigate = useNavigate()
   return (
     <section id="mra_footer" className="col-12">
     <div className="row">
@@ -10,20 +13,21 @@ const Footer = () => {
                     <i className="fa fa-bell-o"></i> 
                     <span>Reminders</span>
                 </li>
-                <li>
-                    <i className="fa fa-cog"></i>
-                    <span>Settings</span>
+                <li className=''>
+                    <i className="fa fa-plus"></i> Add prescription
+                    <span></span>
                 </li>
-                <li>
+                {/* <li>
                     <i className="fa fa-user-md"></i>
                     <span>Treatments</span>
                 </li>
                 <li>
                     <i className="fa fa-user-o"></i>
                     <span>My Account</span>
-                </li>
+                </li> */}
             </ul>
-            <button className="btn btn-default btn-lg btnAdd" type="button">
+            
+            <button onClick={() => navigate('/add')} className="btn btn-default btn-lg btnAdd" type="button" title='add reminder'>
                 <i className="fa fa-plus"></i>
             </button>
         </div>
