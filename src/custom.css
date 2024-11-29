@@ -202,7 +202,12 @@ body
 
 #mra_date_bar ul li span.medicines span.color-green
 {
-    background-color: #0ee36f;
+    background-color: #109410;
+}
+
+#mra_date_bar ul li span.medicines span.color-green
+{
+    background-color: #0ee30e;
 }
 
 /** End Section Date Bar Style **/
@@ -369,6 +374,12 @@ body
     box-shadow: 15px 0 10px -10px rgba(253,120,11,0.15);
 }
 
+.mra_body_data.color-green ul li
+{
+    border-right: 1px solid rgba(68, 116, 5, 0.801);
+    box-shadow: 15px 0 10px -10px rgba(30, 63, 2, 0.39);
+}
+
 .mra_body_data ul li:first-child
 {
     border-radius: 0 25px 0 0;
@@ -387,6 +398,11 @@ body
 .mra_body_data.color-orange .medicine_info .m_icon
 {
     background-color: rgba(253,120,11,0.15);
+}
+
+.mra_body_data.color-green .medicine_info .m_icon
+{
+    background-color: rgba(39, 253, 11, 0.342);
 }
 
 /** End Section Body Style **/

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  $INSERT = "INSERT INTO reminders values('$reminderID', $prescriptionID, '$date', '$to', '$from', '$user', '$status')";
 
  if(mysqli_query($connection, $INSERT)){
-    echo json_encode(['ok' => true, 'message' => 'new remonder added']);
+    echo json_encode(['ok' => true, 'message' => 'new reminder added']);
  }
 
  else{
