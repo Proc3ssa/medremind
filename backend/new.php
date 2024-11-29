@@ -10,17 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $input = json_decode(file_get_contents('php://input'), true);
 
-$user = $input['user'];
- $prescription = $input['prescriptionValue'] ?? '';;
+ $user = $input['user'];
+ $prescriptionID = $input['prescriptionValue'] ?? '';;
  $to = $input['to'] ?? '';;
  $from = $input['from'] ?? '';;
  $date = $input['date'] ??  '';
  $reminderID = uniqid();
- $medicine = explode(',', $prescription)[0];
- $dossage =  explode(',', $prescription)[1];
  $status = "Upcoming";
 
- echo json_encode([$user, $date, $to, $from, $prescription, $reminderID, $medicine, $dossage, $status]);
+ $INSERT = "INSERT INTO reminders values('$reminderID', $prescriptionID, '$date', '$to', '$from', '$user', '$status')";
+
+ if(mysqli_query($connection, $INSERT)){
+    echo json_encode(['ok' => true, 'message' => 'new remonder added']);
+ }
+
+ else{
+    echo json_encode(['ok' => false, 'message' => 'error adding reminder ']);
+ }
+
+ 
 }
 
 else{

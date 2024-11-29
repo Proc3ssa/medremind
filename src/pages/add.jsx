@@ -93,6 +93,10 @@ const handleSubmit = async (e) =>{
   
         const response = await Submit.json();
 
+        
+          setMessage(response.message);
+        
+
         console.log(response);
   
       } catch (error) {
@@ -124,7 +128,7 @@ const handleSubmit = async (e) =>{
                     <legend>Prescriptions</legend>
 
                     {
-                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.medicine + ',' + prescription.dossage} onClick={prescriptionSelect}/>
+                      prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.id} onClick={prescriptionSelect}/>
                         <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" ><h3>{prescription.medicine}</h3> 
                         <p>{prescription.dossage}</p></label></>)
                     )

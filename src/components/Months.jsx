@@ -139,9 +139,13 @@ const Months = () => {
                             Medicine
                             <select name="medicine">
                                 <option value="0">All</option>
+                                <option value="5">5 records</option>
+                                <option value="10">10 records</option>
                             </select>
                         </div>
                     </div>
+
+                    
                     <div class="row mra_body_data color-violet">
                         <div class="col-3">
                             <ul>
@@ -168,6 +172,8 @@ const Months = () => {
                             </div>
                         </div>
                     </div>
+
+
                     <div class="row mra_body_data color-orange">
                         <div class="col-3">
                             <ul>
