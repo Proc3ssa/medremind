@@ -43,7 +43,7 @@ const Add = () => {
   useEffect(() => {
     const getPrescriptions = async () => {
       try {
-        const response = await fetch(`http://localhost:666/getprescription.php?user=${user}`, {
+        const response = await fetch(`/api/getprescription.php?user=${user}`, {
           headers: {
             'Content-type': 'application/json',
           },
@@ -84,7 +84,7 @@ const handleSubmit = async (e) =>{
 
     if(setsubmit){
       try {
-        const Submit = await fetch(`http://localhost:666/new.php`, {
+        const Submit = await fetch(`/api/new.php`, {
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'

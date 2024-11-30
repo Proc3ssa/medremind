@@ -55,7 +55,7 @@ const handleSubmit = async (e) =>{
 
   try {
 
-    const FETCH = await fetch('http://localhost:666/verifyphone.php', 
+    const FETCH = await fetch('/api/verifyphone.php', 
       {
         method:'POST',
         headers:{

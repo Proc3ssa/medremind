@@ -69,7 +69,7 @@ const handleSubmit = async (e) =>{
 
     if(setsubmit){
       try {
-        const Submit = await fetch(`http://localhost:666/new-prescription.php`, {
+        const Submit = await fetch(`/api/new-prescription.php`, {
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'

@@ -85,7 +85,7 @@ today.setHours(0, 0, 0, 0);
     const getReminder = async () => {
       try {
         const response = await fetch(
-          `http://localhost:666/getReminders.php?user=${user}&day=${day}&month=${month}`
+          `/api/getReminders.php?user=${user}&day=${day}&month=${month}`
         );
         const data = await response.json();
         setReminders(data);

@@ -33,7 +33,7 @@ const Signup = () => {
 
    
 
-    const fech = await fetch('http://localhost:666/checkvalidity.php', 
+    const fech = await fetch('/api/checkvalidity.php', 
       {
         method:'POST',
         headers :{
@@ -106,7 +106,7 @@ const Signup = () => {
       password: password1,
     };
 
-    const response = await fetch('http://localhost:666/signup.php', {
+    const response = await fetch('/api/signup.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

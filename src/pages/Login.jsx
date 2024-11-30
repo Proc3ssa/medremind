@@ -37,7 +37,7 @@ const handleSubmit = async (e) =>{
 
   try {
 
-    const FETCH = await fetch('http://localhost:666/login.php', 
+    const FETCH = await fetch('/api/login.php', 
       {
         method:'POST',
         headers:{
