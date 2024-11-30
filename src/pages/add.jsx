@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 const Add = () => {
   const navigate = useNavigate();
@@ -128,6 +129,7 @@ const handleSubmit = async (e) =>{
                     <legend>Prescriptions</legend>
 
                     {
+                      prescriptions == "" ? <a href='/new-prescription'>No prescription found. Add prescriptions</a> :
                       prescriptions.map((prescription, id) =>(<><input type="radio" id={id} name="options" value={prescription.id} onClick={prescriptionSelect}/>
                         <label for={id} style={{backgroundColor:getcolor()}} class="radio-button" ><h3>{prescription.medicine}</h3> 
                         <p>{prescription.dossage}</p></label></>)

@@ -174,7 +174,7 @@ today.setHours(0, 0, 0, 0);
         </div>
 
         {reminders.length === 0 ? (
-          <p>No records for said date</p>
+          <p>No reminders</p>
         ) : (
           reminders.map((rem) => (
             <div

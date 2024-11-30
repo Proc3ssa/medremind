@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import logo from '../assets/logo-colored.png'
 import { ThreeDots } from 'react-loader-spinner';
 import Cookies from 'js-cookie';
@@ -10,7 +10,14 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [isloading, setisLoading] = useState(false)
 const navigate = useNavigate();
+const user = Cookies.get('user');
 
+
+useEffect(() => {
+  if (user) {
+    navigate('/dashboard');
+  }
+}, [user]);
 
 
 const handleSubmit = async (e) =>{
