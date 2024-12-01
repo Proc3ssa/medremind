@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import logo from '../assets/logo-colored.png'
 import { ThreeDots } from 'react-loader-spinner';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 const Login = () => {
 const [credentialsError, setCredentialserror] = useState('');
@@ -90,7 +90,7 @@ const handleSubmit = async (e) =>{
           )
              
             }</button>
-          <p style={{marginTop:'20px'}}>Don't have an account? <u><i><a style={{color:'green'}} href="/signup"> Register</a></i></u></p>
+          <p style={{marginTop:'20px'}}>Don't have an account? <u><i><NavLink style={{color:'green'}} to="/signup"> Register</NavLink></i></u></p>
           </form>
           <p style={{fontSize:'12px', marginTop:'10px'}}>Compyright &copy; Processor 2024</p>
         </div>
