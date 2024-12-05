@@ -9,7 +9,7 @@ export default defineConfig({
     '/api' :{
       target:'http://backends.infy.uk',
       changeOrigin:true,
-      rewrite: (path) => path.replace(/^\/api/, ''),
+      rewrite: (path) => path.replace(/^\/api/, '')
     }
    }
  }
