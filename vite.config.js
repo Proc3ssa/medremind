@@ -7,7 +7,7 @@ export default defineConfig({
  server:{
    proxy:{
     '/api' :{
-      target:'http://backends.infy.uk',
+      target:'http://backends.infy.uk/medremind',
       changeOrigin:true,
       rewrite: (path) => path.replace(/^\/api/, '')
     }
