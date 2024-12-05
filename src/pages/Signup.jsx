@@ -33,7 +33,7 @@ const Signup = () => {
 
    
 
-    const fech = await fetch('/api/checkvalidity.php', 
+    const fech = await fetch('http://beackends.infy.uk/medremind/checkvalidity.php', 
       {
         method:'POST',
         headers :{
